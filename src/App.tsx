@@ -1,20 +1,54 @@
 import { useState } from "react";
-import Button from "./components/Button";
+import "./styles.css";
 
 function App() {
-  const [showGreeting, setShowGreeting] = useState(false); //Controls when "Go Team VISTA!" shows
-
-  const greeting = () => setShowGreeting(true); //Removed // for implicit return; set state to true
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [camSelect, setCamSelect] = useState(false);
 
   return (
-    <div>
-      <Button
-        children="Click Me!"
-        className="btn btn-primary"
-        onClick={greeting}
-      ></Button>
+    <div className="app">
+      {/* Side Menu (Collapsible) */}
+      <div className={`side-menu ${isMenuOpen ? "open" : ""}`}>
+        <button
+          className="menu-toggle"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? "◄" : "►"}
+        </button>
+        {isMenuOpen && (
+          <div className="menu-content">
+            <h3>Menu</h3>
+            <ul>
+              <li>Context</li>
+              <li>Materials</li>
+              <li>Protocol</li>
+              <li>Questions</li>
+            </ul>
+          </div>
+        )}
+      </div>
 
-      {showGreeting && <h1>Go Team VISTA!</h1>}
+      <div className="main-content">
+        <div className="video-feed">
+          {camSelect ? (
+            <div className="video-text">1</div>
+          ) : (
+            <div className="video-text">2</div>
+          )}
+
+          <button
+            className="camera-button"
+            onClick={() => setCamSelect(!camSelect)}
+          >
+            {camSelect ? "📷2" : "📷1"}
+          </button>
+        </div>
+
+        <div className="action-buttons">
+          <button className="btn">Placeholder</button>
+          <button className="btn">Placeholder</button>
+        </div>
+      </div>
     </div>
   );
 }
