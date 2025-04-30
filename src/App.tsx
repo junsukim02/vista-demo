@@ -24,6 +24,10 @@ function App() {
     }
   };
 
+  const handleConfirm = () => {
+    console.log("Confirmed value:", sliderValue);
+  };
+
   const menuItems = [
     {
       id: "context",
@@ -135,12 +139,18 @@ function App() {
               onChange={handleInputChange}
               className="number-input"
             />
+            <button className="confirm-btn" onClick={handleConfirm}>
+              Confirm
+            </button>
           </div>
         </div>
       </div>
 
       {activeModal && (
-        <div className="modal-overlay" onClick={closeModal}>
+        <div
+          className={`modal-overlay ${activeModal ? "fade-in" : ""}`}
+          onClick={closeModal}
+        >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={closeModal}>
               ×
